@@ -6,5 +6,5 @@ and Web for create coin pair , and more upper and upper
 ## What's Project Inside
 
 - [ Bun ] : Super Fast managing package.
-- [ mysten/sui.js ] : Really help, if you create DApp on Sui
+- [ mysten/sui.js ] : Really helpFul, if you create DApp on Sui
 
