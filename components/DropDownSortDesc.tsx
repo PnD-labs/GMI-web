@@ -21,7 +21,7 @@ const DropDownSortBumpDesc = () => {
     <DropdownMenu>
       <DropdownMenuTrigger className="w-[116px] h-10 px-3 py-2 bg-slate-800 rounded-[8px] justify-between items-center inline-flex text-indigo-200 text-sm font-normal hover:bg-slate-600">
         {currentSort}
-        <ChevronDownIcon size={16} />
+        <ChevronDownIcon scale={16} />
       </DropdownMenuTrigger>
       <DropdownMenuContent className="border-transparent mt-1 flex-col text-indigo-200 text-sm font-normal w-[116px] bg-slate-800 rounded-[8px]">
         {Object.entries(SORT_MENU).map(([key, value]) => (

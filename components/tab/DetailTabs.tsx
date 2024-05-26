@@ -1,30 +1,29 @@
 import { SetStateAction, useState } from "react";
 
-type Tab = "Following" | "Terminal" | "Activity";
+
 
 enum TabEnum {
-  Following = "Following",
-  Terminal = "Terminal",
-  Activity = "Activity",
+  Thread = "Thread",
+  Trades = "Trades",
 }
 
 interface TabsProps {
   setCurrentTab: any;
 }
-const Tabs = ({ setCurrentTab }: TabsProps) => {
-  const [tabState, setTabState] = useState<Tab>(TabEnum.Terminal);
+const DetailTabs = ({ setCurrentTab}: TabsProps) => {
+  const [tabState, setTabState] = useState<string>(TabEnum.Trades);
 
-  const handleTabChange = (tab: Tab) => {
+  const handleTabChange = (tab: string) => {
     setTabState(tab);
     setCurrentTab(tab)
   };
 
   return (
-    <div className="flex gap-[16px] pt-[16px] pb-[16px] relative">
+    <div className="flex w-20 text-slate-500 text-2xl font-semibold gap-4 py-6">
       {Object.values(TabEnum).map((tab) => (
         <div
           key={tab}
-          className={`relative cursor-pointer flex items-center justify-center w-[85px] text-lg font-extrabold transition-all duration-300 ${tabState === tab ? "text-indigo-500" : "text-indigo-200 hover:text-indigo-500"
+          className={`relative cursor-pointer flex items-center justify-center w-[85px] text-lg font-extrabold transition-all duration-300 ${tabState === tab ? "text-indigo-500" : "text-slate-500 hover:text-indigo-500"
             }`}
           onClick={() => handleTabChange(tab)}
         >
@@ -40,4 +39,4 @@ const Tabs = ({ setCurrentTab }: TabsProps) => {
   );
 };
 
-export default Tabs;
+export default DetailTabs;

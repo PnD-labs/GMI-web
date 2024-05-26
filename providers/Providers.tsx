@@ -7,7 +7,7 @@ import { HydrationBoundary, QueryClient, QueryClientProvider } from "@tanstack/r
 import { Theme } from "@radix-ui/themes";
 
 const { networkConfig } = createNetworkConfig({
-  localnet: { url: getFullnodeUrl("localnet") },
+  // localnet: { url: getFullnodeUrl("localnet") },
   devnet: { url: getFullnodeUrl("devnet") },
   testnet: { url: getFullnodeUrl("testnet") },
   mainnet: { url: getFullnodeUrl("mainnet") },
@@ -18,7 +18,7 @@ function Providers({ children }: React.PropsWithChildren) {
   return (
     <Theme appearance="dark">
       <QueryClientProvider client={queryClient}>
-        <SuiClientProvider networks={networkConfig} defaultNetwork="devnet">
+        <SuiClientProvider networks={networkConfig} defaultNetwork="testnet">
           <WalletProvider autoConnect>
             <HydrationBoundary>{children}</HydrationBoundary>
           </WalletProvider>

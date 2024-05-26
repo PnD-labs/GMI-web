@@ -5,16 +5,14 @@ import { useCurrentAccount, useSuiClient } from '@mysten/dapp-kit';;
 import TokenList from "@/components/TokenList";
 import DropDownSortBumpDesc from "@/components/DropDownSortDesc";
 import AnimationOnOff from "@/components/swich/Animations";
-import NsfwOnOff from "@/components/swich/Nsfw";
 import Top3CoinSection from "@/components/Top3Coinbox";
 import DropDownSortBumpOther from "@/components/DropDownSortBumpOther";
 import { useEffect, useState } from "react";
 import { CoinBalance } from "@mysten/sui.js/client";
 import { useRouter } from "next/navigation";
-import Tabs from "@/components/Tabs";
-import PaginationTokenList from "@/components/PaginationTokenList";
+import MainTabs from "@/components/tab/MainTabs";
+import PaginationTokenList from "@/components/pagenation/PaginationTokenList";
 
-type Tab = "Following" | "Terminal" | "Activity";
 
 enum TabEnum {
   Following = "Following",
@@ -57,7 +55,7 @@ export default function Home() {
       </div>
       <div className="w-full">
         <div className="mt-4">
-          <Tabs setCurrentTab={setCurrentTab} />
+          <MainTabs setCurrentTab={setCurrentTab}/>
         </div>
 
         <Box className="flex justify-between">

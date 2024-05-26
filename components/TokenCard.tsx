@@ -1,3 +1,4 @@
+import { useRouter } from "next/navigation";
 
 
 
@@ -12,8 +13,15 @@ export interface ITokenCard {
 
 
 const TokenCard = () => {
+
+  const router = useRouter();
+
+  const handleClick = () => {
+    router.push("/detail");
+  };
+
   return (
-    <div className="w-full min-h-[131px]  px-3 md:pr-8 py-[22px] bg-slate-950 rounded-2xl border-2 border-indigo-500 justify-start items-center gap-3 inline-flex">
+    <div onClick={() => handleClick()} className="hover:bg-indigo-900 cursor-pointer w-full min-h-[131px]  px-3 md:pr-8 py-[22px] bg-slate-950 rounded-2xl border-2 border-indigo-500 justify-start items-center gap-3 inline-flex">
       <div className="min-w-[127px] h-[127px] rounded-2xl border border-indigo-500" />
       <div className="flex-col justify-start items-center gap-2.5 inline-flex pl-4">
         <div className="w-[181px] h-8 px-2  bg-indigo-500 rounded-xl shadow justify-center items-center flex">

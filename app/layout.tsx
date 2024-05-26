@@ -21,7 +21,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Providers>
-          <div className="h-screen  w-full bg-slate-950">
+          <div className=" h-screen  w-full bg-slate-950">
             <Header />
             {children}
             <Toaster />

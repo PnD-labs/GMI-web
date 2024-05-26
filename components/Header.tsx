@@ -7,7 +7,7 @@ import { Button } from "./ui/button"
 import { ConnectModal, useCurrentAccount, useDisconnectWallet, useSuiClient } from "@mysten/dapp-kit"
 import { useEffect, useState } from "react"
 import { CoinBalance } from "@mysten/sui.js/client"
-import { useRouter } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import { useToast } from "./ui/use-toast"
 
 const Header = () => {
@@ -19,7 +19,7 @@ const Header = () => {
   const [balance, setBalance] = useState<CoinBalance>();
 
   const accountAddress = currentAccount?.address
-
+  const pathname = usePathname();
   const router = useRouter();
   const { toast } = useToast()
 
@@ -52,7 +52,7 @@ const Header = () => {
     <div className="flex justify-center w-full">
       <div className="max-w-[1608px] flex  py-4  w-full border-b-2 border-indigo-900">
         <Box>
-          <Heading>GMI</Heading>
+          <Heading className="cursor-pointer" onClick={()=>router.push("/")}>GMI</Heading>
         </Box>
 
         {
@@ -104,8 +104,10 @@ const Header = () => {
 
 
         <div className="flex gap-3 w-full justify-end">
+
+
           {
-            currentAccount && (
+            currentAccount && pathname !== '/newCoin' && (
               <div
                 onClick={() => router.push('/newCoin')}
                 className="cursor-pointer duration-200 w-[185px] h-10 px-4 py-2 rounded-xl shadow border-2 border-indigo-500 justify-center items-center gap-2 inline-flex hover:bg-indigo-400">
@@ -115,8 +117,8 @@ const Header = () => {
           }
           {
             currentAccount && (
-              <div className="w-28 h-10 px-4 py-2 rounded-xl shadow border-2 border-indigo-500 justify-center items-center gap-2 inline-flex">
-                <div className="text-slate-50 text-base font-bold ">{balance ? balance.totalBalance : 0.0} SUI</div>
+              <div className="h-10 px-4 py-2 rounded-xl shadow border-2 border-indigo-500 justify-center items-center gap-2 inline-flex">
+                <div className="text-slate-50 text-base font-bold ">{balance ? (BigInt(balance.totalBalance)/BigInt(10**9)).toString() : 0.0} SUI</div>
               </div>
             )
           }
