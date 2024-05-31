@@ -1,4 +1,5 @@
 
+import { useRouter } from 'next/navigation';
 const mockData = [
   {
     id: 0,
@@ -105,6 +106,7 @@ const mockData = [
 
 const TokenHolderDistributionCard = () => {
   //TDOO: Token Holder 상위 20개 그중 1등은 bonding curve 표
+  const router = useRouter()
   return (
     <div className="w-full max-w-[520px] mt-6 ">
       <span className="text-slate-500
@@ -115,12 +117,14 @@ const TokenHolderDistributionCard = () => {
         const isTopImoji = index === 0 ? "🥇" : "🥈"
 
         return (
-          <div key={index} className="flex justify-between items-center mt-0">
-            <div className="flex items-start gap-0">
-              <span className="text-slate-500 text-lg font-semibold">{value.id + 1}</span>
-              <span className="text-slate-500 text-lg font-semibold ml-2">{value.tokenHolderName}</span>
-              <span className="text-slate-500 text-lg font-semibold ml-2">{isTopNickname}</span>
-              <span className="text-slate-500 text-lg font-semibold ml-2">{isTopImoji}</span>
+          <div 
+          onClick={() => router.push('/profile')}
+          key={index} className=" flex justify-between items-center mt-0">
+            <div className="hover:border-b-[1px] hover:border-slate-40 text-slate-500 hover:text-slate-300  cursor-pointer flex items-start gap-0">
+              <span className=" text-lg font-semibold">{value.id + 1}</span>
+              <span className=" text-lg font-semibold ml-2">{value.tokenHolderName}</span>
+              <span className=" text-lg font-semibold ml-2">{isTopNickname}</span>
+              <span className=" text-lg font-semibold ml-2">{isTopImoji}</span>
             </div>
             <span className="text-slate-500 text-lg font-semibold">{value.holdingPercentage}</span>
           </div>

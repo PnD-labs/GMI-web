@@ -7,7 +7,12 @@ import { HeartFilledIcon } from "@radix-ui/react-icons";
 import { MessageSquare } from "lucide-react";
 import ProfileTabs from "@/components/tab/ProfileTabs";
 import TokenCardProfile from "@/components/TokenCardProfile";
-
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
 const UserProfile = () => {
 
   const currentAccount = useCurrentAccount();
@@ -78,9 +83,20 @@ const UserProfile = () => {
           </div>
         </div>
         <div className="mt-2">
-          <div className="w-full h-10 p-2 bg-slate-800 rounded-xl border-2 border-indigo-500 justify-center items-center gap-2.5 inline-flex">
-            <div className="w-full text-white text-sm font-bold font-['Pretendard'] leading-normal">{account && account.slice(0, 48) + "..."}</div>
-          </div>
+        <TooltipProvider>
+      <Tooltip>
+    
+    <TooltipTrigger>
+      <div className="w-full h-10 p-2 bg-slate-800 rounded-xl border-2 border-indigo-500 justify-center items-center gap-2.5 inline-flex">
+        <div className="w-full text-white text-sm font-bold font-['Pretendard'] leading-normal">{account && account.slice(0, 48) + "..."}</div>
+       </div>
+    </TooltipTrigger>
+    <TooltipContent>
+      <p>{account && account}</p>
+    </TooltipContent>
+  </Tooltip>
+</TooltipProvider>
+          
           <div className="flex justify-end mt-1">
             <div className="text-white text-sm font-bold">
               View on Suiscan

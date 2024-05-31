@@ -5,6 +5,7 @@ import * as React from "react"
 import {
   ColumnDef,
   ColumnFiltersState,
+  RowSelectionState,
   SortingState,
   VisibilityState,
   flexRender,
@@ -25,6 +26,7 @@ import {
 } from "@/components/ui/table"
 
 import { RefreshCw } from "lucide-react"
+import { useRouter } from "next/navigation"
 
 type TradeType = "buy" | "sell"
 
@@ -119,7 +121,10 @@ export const TradesTable = ({ data }: { data: ITradesData[] }) => {
   )
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({})
-  const [rowSelection, setRowSelection] = React.useState({})
+  const [rowSelection, setRowSelection] = React.useState<RowSelectionState>({})
+  React.useEffect(()=>{
+    console.log(rowSelection)
+  },[rowSelection])
   const table = useReactTable({
     data,
     columns,
@@ -142,7 +147,7 @@ export const TradesTable = ({ data }: { data: ITradesData[] }) => {
       },
     },
   });
-
+const router = useRouter();
   return (
     <>
       <div>
@@ -174,6 +179,10 @@ export const TradesTable = ({ data }: { data: ITradesData[] }) => {
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell
+                    onClick={()=>{
+                      router.push("/profile")
+                    }}
+                    className="cursor-pointer"
                       key={cell.id}>
                       {flexRender(
                         cell.column.columnDef.cell,

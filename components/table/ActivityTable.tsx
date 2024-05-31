@@ -24,6 +24,7 @@ import {
 } from "@/components/ui/table"
 
 import { RefreshCw } from "lucide-react"
+import { useRouter } from "next/navigation"
 
 type TradeType = "buy" | "sell"
 
@@ -142,7 +143,7 @@ export const ActivityTable = ({ data }: { data: IActivityTable[] }) => {
       },
     },
   });
-
+const router = useRouter()
   return (
     <>
       <div>
@@ -169,11 +170,16 @@ export const ActivityTable = ({ data }: { data: IActivityTable[] }) => {
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
                 <TableRow
+                
                   className="border-b-[1px] border-indigo-950 hover:bg-indigo-950 text-slate"
                   key={row.id}
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell
+                    onClick={()=>{
+                      router.push("/profile")
+                    }}
+                    className="cursor-pointer"
                       key={cell.id}>
                       {flexRender(
                         cell.column.columnDef.cell,
