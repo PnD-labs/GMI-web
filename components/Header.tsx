@@ -9,7 +9,9 @@ import { useEffect, useState } from "react"
 import { CoinBalance } from "@mysten/sui.js/client"
 import { usePathname, useRouter } from "next/navigation"
 import { useToast } from "./ui/use-toast"
+import mainLogo from "../assets/icons/logo.jpg"
 import axios from "axios";
+import Image from "next/image"
 const Header = () => {
   const client = useSuiClient();
   const currentAccount = useCurrentAccount();
@@ -50,10 +52,8 @@ const Header = () => {
   return (
     <div className="flex justify-center w-full">
       <div className="max-w-[1608px] flex  py-4  w-full ">
-        <Box>
-          <Heading className="cursor-pointer" onClick={() => router.push("/")}>GMI</Heading>
-        </Box>
-
+           <Image src={mainLogo} alt="logo" className="cursor-pointer
+           rounded-[8px] w-[50px] h-[50px]" onClick={() => router.push("/")}/>
         {
           accountAddress ? <>
             <div className="ml-[54px] mr-[68px] w-full max-w-[377px]  h-10 pl-5 py-2.5 rounded-xl border border-indigo-500 justify-center items-center gap-1 inline-flex">
