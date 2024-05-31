@@ -45,10 +45,9 @@ const DetailCoinView = () => {
                 <div className=" flex-row gap-3 h-[39px] px-2.5 py-[9px] bg-indigo-500 rounded-full justify-start items-center  inline-flex">
                   <div className="text-white text-lg font-extrabold ">created by</div>
                   <div className="w-[18px] h-[18px] rounded bg-white" />
-                  <div className="text-white text-lg font-extrabold ">howgay</div>
+                  <div className="text-white text-lg font-extrabold ">0x1234...</div>
                 </div>
               </div>
-
               <div className="pt-[19px] text-5xl text-white font-extrabold">Ryen Gorcia</div>
             </div>
           </div>
@@ -63,7 +62,7 @@ const DetailCoinView = () => {
       <DetailInfo />
       <div className="flex gap-6 mt-[23px]">
         <div className="flex-[1064]">
-          <DetailTradingView setCurrentTab={setCurrentTab} />
+          <DetailTradingView />
         </div>
         <div className="flex-col flex-[520]">
           <Card className="w-[520px] pl-1 pb-4 bg-slate-800  rounded-2xl border-none shadow">

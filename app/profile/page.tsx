@@ -51,7 +51,6 @@ const UserProfile = () => {
   return (
     <div className="flex-col max-w-[1608px] w-full mx-auto min-h-screen flex mt-20 items-center">
       <div >
-
         <div className="flex">
           <Image src={coinImg} alt={"123"} className="w-[70px] h-[70px] rounded-full" />
           <div className="flex w-full justify-between pl-1">
@@ -62,8 +61,6 @@ const UserProfile = () => {
                 </div>
                 <div className="pt-[10px] pb-1 text-white text-sm font-bold">{mockData.followers} Followers</div>
               </div>
-
-
               <div className="flex gap-2 items-center">
                 <div className="flex items-center text-red-400 text-sm font-bold gap">Like received {mockData.like}
                   <HeartFilledIcon />
@@ -80,7 +77,6 @@ const UserProfile = () => {
             >Follow</button>
           </div>
         </div>
-
         <div className="mt-2">
           <div className="w-full h-10 p-2 bg-slate-800 rounded-xl border-2 border-indigo-500 justify-center items-center gap-2.5 inline-flex">
             <div className="w-full text-white text-sm font-bold font-['Pretendard'] leading-normal">{account && account.slice(0, 48) + "..."}</div>
@@ -94,7 +90,6 @@ const UserProfile = () => {
 
         {/* CoinHeld , Coins created , Followes , Following */}
         <ProfileTabs setCurrentTab={setCurrentTab} />
-
         {currentTab === TabEnum.CoinHeld && [0, 0, 0, 0, 0].map((value, index) => {
           return (
             <div key={index} className="my-3 ">
@@ -114,18 +109,13 @@ const UserProfile = () => {
             </div>
           )
         })}
-
         {currentTab === TabEnum.CoinCreated && [0, 0].map(() => {
           return (
             <div className="max-w-[456px] my-3">
               <TokenCardProfile />
             </div>
-
           )
         })}
-
-
-
       </div>
     </div>
 

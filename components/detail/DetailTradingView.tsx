@@ -6,13 +6,16 @@ import PaginationCoinDetail from "../pagenation/PaginationCoinDetail"
 import DetailTabs from "../tab/DetailTabs"
 import { Card, CardContent } from "../ui/card"
 import TradingViewWidget from "../TradingViewWidget"
+enum CoinTabEnum {
+  Thread = "Thread",
+  Trades = "Trades",
+}
 
-
-const DetailTradingView = (setCurrentTab: any) => {
+const DetailTradingView = () => {
   const [timeframe, setTimeframe] = useState('1d');
   const chartRef = useRef<HTMLDivElement>(null);
+  const [currentTab, setCurrentTab] = useState(CoinTabEnum.Trades)
 
-  
   return (
     <div className="flex-col">
       <Card className="w-full max-w-[1064px] rounded-2xl border-none shadow">
@@ -23,7 +26,7 @@ const DetailTradingView = (setCurrentTab: any) => {
           <DetailTabs setCurrentTab={setCurrentTab} />
           <PaginationCoinDetail />
         </div>
-        <TradesTableView />
+        {currentTab === CoinTabEnum.Trades && <TradesTableView />}
       </div>
     </div>
   )

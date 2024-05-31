@@ -50,7 +50,7 @@ const TokenCardProfile = () => {
           <div className="justify-center items-center gap-[3px] inline-flex">
             <div className="text-white text-sm font-bold ">Created by</div>
             <div className="w-[18px] h-[18px] rounded bg-white" />
-            <div className="text-white text-sm font-bold ">howgay</div>
+            <div className="text-white text-sm font-bold ">0x1234...</div>
           </div>
           <div className="flex gap-1">
             <div className=" text-cyan-500 text-xs font-bold ">market cap: 25.46K</div>
