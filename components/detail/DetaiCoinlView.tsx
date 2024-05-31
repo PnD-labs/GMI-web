@@ -12,7 +12,9 @@ import PaginationCoinDetail from "../pagenation/PaginationCoinDetail"
 import TokenHolderDistributionCard from "../token-holder/TokenHolderDistribution"
 import { Card } from "../ui/card"
 import TradingBox from "./TradingBox"
-
+import ProgressBox from "./ProgressBox"
+import coinImg from "../../assets/icons/coinImg.png";
+import Image from "next/image"
 enum CoinTabEnum {
   Thread = "Thread",
   Trades = "Trades",
@@ -32,7 +34,8 @@ const DetailCoinView = () => {
       <div className="flex justify-between">
         <div className="flex-col">
           <div className="flex gap-4 mt-[39px]">
-            <div className="w-[113px] h-[113px] rounded-2xl border-2 border-indigo-500">
+            <div className="w-[113px] h-[113px] ">
+              <Image src={coinImg} alt="coinImg" className="w-[113px] h-[113px] rounded-2xl" />
             </div>
             <div className="flex-col gap-[19px] py-[3.5px]">
               <div className="flex gap-[14px]">
@@ -55,6 +58,7 @@ const DetailCoinView = () => {
         </div>
         <div>
         </div>
+        <ProgressBox />
       </div>
       <DetailInfo />
       <div className="flex gap-6 mt-[23px]">
@@ -62,7 +66,7 @@ const DetailCoinView = () => {
           <DetailTradingView setCurrentTab={setCurrentTab} />
         </div>
         <div className="flex-col flex-[520]">
-          <Card className="w-[520px] h-[473px] bg-slate-800  rounded-2xl border-none shadow">
+          <Card className="w-[520px] pl-1 pb-4 bg-slate-800  rounded-2xl border-none shadow">
             <TradingBox />
           </Card>
           <TokenHolderDistributionCard />

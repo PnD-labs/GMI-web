@@ -10,6 +10,7 @@ import axios from "axios";
 import { useAccounts, useCurrentAccount, useSignAndExecuteTransactionBlock, useSuiClient, useSuiClientMutation } from "@mysten/dapp-kit";
 import { getFullnodeUrl } from '@mysten/sui.js/client';
 import { useToast } from "@/components/ui/use-toast";
+import { useRouter } from "next/navigation";
 
 
 const NewCoin = () => {
@@ -26,6 +27,7 @@ const NewCoin = () => {
 
   const client = useSuiClient();
 
+  const router = useRouter()
 
   useEffect(() => {
     if (currentAccount) {
@@ -101,24 +103,24 @@ const NewCoin = () => {
 
   const estimateGas = (currentAccountAddress: string) => {
     const [coin] = tx.splitCoins(tx.gas, [tx.pure.u64(10000000)]);
-     tx.transferObjects([coin], tx.pure.address(currentAccountAddress));
+    tx.transferObjects([coin], tx.pure.address(currentAccountAddress));
   }
   const splitSui20k = async (currentAccountAddress: string) => {
     const allCoinList = client.getAllCoins({ owner: currentAccountAddress })
-    const userSuiCoinList =  (await allCoinList).data.filter((data) => data.coinType.includes("sui::SUI"))
+    const userSuiCoinList = (await allCoinList).data.filter((data) => data.coinType.includes("sui::SUI"))
     const [coin] = tx.splitCoins(tx.object(userSuiCoinList[0].coinObjectId), [tx.pure.u64(20000000)]);
-     tx.transferObjects([coin], tx.pure.address(currentAccountAddress));
+    tx.transferObjects([coin], tx.pure.address(currentAccountAddress));
     console.log([coin], "split20kCoins")
-    console.log(userSuiCoinList,"userSuiCoinList")
+    console.log(userSuiCoinList, "userSuiCoinList")
     // const [coin] = tx.splitCoins((await client.getCoins({ owner: currentAccountAddress })).data.filter((data)=>data.coinType.includes("sui::SUI")), [tx.pure.u64(BigInt(userSuiCoinList[0].balance) - BigInt(20000000)), tx.pure.u64(20000000)]);
     // tx.transferObjects([coin], tx.pure.address(currentAccountAddress));
   }
 
-  async function fetchSuiCoins(ownerAddress:string) {
+  async function fetchSuiCoins(ownerAddress: string) {
     const allCoins = await client.getAllCoins({ owner: ownerAddress });
     return allCoins.data.filter((coin) => coin.coinType.includes("sui::SUI"));
   }
-  async function splitSuiCoins(ownerAddress:string) {
+  async function splitSuiCoins(ownerAddress: string) {
     const suiCoins = await fetchSuiCoins(ownerAddress);
 
     if (suiCoins.length === 0) {
@@ -173,7 +175,7 @@ const NewCoin = () => {
           },
         }
       );
-    } catch (error:any) {
+    } catch (error: any) {
       toast({
         title: "Error",
         description: error,
@@ -202,11 +204,11 @@ const NewCoin = () => {
 
     return filteredCoin
   }
- 
+
   const handleCreateCoinPool = async ({ currentAccount, treasury_id, metadata_id, meme_coin, suiTokenInput }: ICreatePoolInput) => {
-   console.log("args" ,meme_coin, suiTokenInput,(process.env.NEXT_PUBLIC_AMM_CONFIG_ID as string),treasury_id, metadata_id,  )
-  //  estimateGas(currentAccount.address);
-   
+    console.log("args", meme_coin, suiTokenInput, (process.env.NEXT_PUBLIC_AMM_CONFIG_ID as string), treasury_id, metadata_id,)
+    //  estimateGas(currentAccount.address);
+
     tx3.moveCall({
       target: `${process.env.NEXT_PUBLIC_AMM_PACKAGE_ID}::amm_swap::create_pool`,
       arguments: [
@@ -221,7 +223,7 @@ const NewCoin = () => {
       ],
     })
 
-   signAndExecuteTransaction(
+    signAndExecuteTransaction(
       {
         transactionBlock: tx3,
         account: currentAccount,
@@ -284,25 +286,25 @@ const NewCoin = () => {
               tx2.splitCoins(userSuiCoinList[0].coinObjectId, [tx2.pure(20000000), tx2.pure(20000000)])
               tx2.setGasBudget(8000000);
 
-            //   signAndExecuteTransaction(
-            //    {
-            //      transactionBlock: tx2,
-            //      account: currentAccount,
-            //      chain: "sui:testnet",
-            //      requestType: "WaitForLocalExecution"
-            //    },
-            //    {
-            //      onSuccess: (result) => {
-            //        console.log('executed transaction', result);
-            //        console.log(result.digest, "digest");
-            //      },
-            //      onError: (error) => {
-            //        console.log('createPoolError', error);
-            //      },
-            //    } 
-            //  )
-            //  handleCreateCoinPool({ currentAccount: currentAccount, treasury_id: data.treasury_id, metadata_id: data.metadata_id, meme_coin: userMemeCoinList[0], suiTokenInput: userSuiCoinList[0] })
-            
+              //   signAndExecuteTransaction(
+              //    {
+              //      transactionBlock: tx2,
+              //      account: currentAccount,
+              //      chain: "sui:testnet",
+              //      requestType: "WaitForLocalExecution"
+              //    },
+              //    {
+              //      onSuccess: (result) => {
+              //        console.log('executed transaction', result);
+              //        console.log(result.digest, "digest");
+              //      },
+              //      onError: (error) => {
+              //        console.log('createPoolError', error);
+              //      },
+              //    }
+              //  )
+              //  handleCreateCoinPool({ currentAccount: currentAccount, treasury_id: data.treasury_id, metadata_id: data.metadata_id, meme_coin: userMemeCoinList[0], suiTokenInput: userSuiCoinList[0] })
+
             },
             onError: (error) => {
               console.log('error', error);
@@ -324,7 +326,7 @@ const NewCoin = () => {
     <div className="flex-col max-w-[1608px] w-full mx-auto min-h-screen flex mt-20 items-center">
       <div className="flex justify-start w-full max-w-[386px] mb-[9px]">
         <Button
-          onClick={executeSplitTransaction}
+          onClick={() => router.push("/")}
           className="w-[112px] rounded-[8px] bg-indigo-500">Back</Button>
       </div>
       <form className="w-[386px] flex-col justify-start items-start gap-3.5 inline-flex">

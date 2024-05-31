@@ -2,15 +2,22 @@
 import { useState } from "react"
 import { Button } from "../ui/button"
 import { Input } from "../ui/input"
+import { truncate } from "fs"
 
 
 const TradingBox = () => {
 
   const [isClickBuyButton, setIsClickBuyButton] = useState(true)
+  const [isSuiButton, setSuiButton] = useState(true)
+  const [tradeCoinName, setTradeCoinName] = useState("SUI")
 
   const handleClick = () => {
     setIsClickBuyButton(!isClickBuyButton)
   }
+  const handleSwitch = () => {
+    setSuiButton(!isSuiButton)
+  }
+  
 
 
 
@@ -26,7 +33,9 @@ const TradingBox = () => {
       </div>
       <div className="flex-col max-w-[486px] w-full bg-slate-950 rounded-2xl mt-4 px-3 py-4">
         <div className="flex justify-between">
-          <div className="
+          <div
+          onClick={handleSwitch}
+          className="
             hover:bg-slate-400
             duration-300
             border-none
@@ -34,13 +43,13 @@ const TradingBox = () => {
             flex text-xs items-center justify-center bg-slate-800 rounded-xl px-[25px] py-3">
             Switch to GQUDUX
           </div>
-          <div className="
+          {/* <div className="
             hover:bg-slate-400
             duration-300
             cursor-pointer
             flex text-xs items-center justify-center bg-slate-800 rounded-xl px-[25px] py-2.5">
             Set max slippage
-          </div>
+          </div> */}
         </div>
         <div className="relative w-full h-[68px] mt-3">
           <Input
@@ -48,10 +57,9 @@ const TradingBox = () => {
             className="px-5  bg-transparent text-2xl font-extrabold w-full h-full border-indigo-500 border-2 rounded-xl pr-12"
             placeholder="0.0"
           />
-          <span className="absolute inset-y-0 right-0 flex items-center pr-6 text-2xl font-semibold">SUI</span>
+          <span className="absolute inset-y-0 right-0 flex items-center pr-6 text-2xl font-semibold">{isSuiButton ? "SUI" : "GQUDUX"}</span>
         </div>
-        <div className="flex gap-[5px] pt-2">
-
+        {isSuiButton &&  <div className="flex gap-[5px] pt-2">
           <Button className="  hover:bg-slate-400
           duration-300
           cursor-pointer
@@ -68,9 +76,8 @@ const TradingBox = () => {
           duration-300
           cursor-pointer
           flex text-xs items-center justify-center bg-slate-800 rounded-2xl px-[31px] h-8">10 Sui</Button>
-
-        </div>
-
+        </div>}
+       
         <div className="text-slate-500 text-lg font-medium pt-[59px]">
           78059293.470617 $gorcia
         </div>
