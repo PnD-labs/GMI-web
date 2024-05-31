@@ -24,7 +24,6 @@ const DetailCoinView = () => {
 
 
   const router = useRouter()
-  const [currentTab, setCurrentTab] = useState(CoinTabEnum.Trades);
 
   return (
     <div className="max-w-[1608px] w-full mx-auto min-h-screen flex-col items-center justify-center mt-[66px]">
