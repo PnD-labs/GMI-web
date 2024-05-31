@@ -12,6 +12,7 @@ import { CoinBalance } from "@mysten/sui.js/client";
 import { useRouter } from "next/navigation";
 import MainTabs from "@/components/tab/MainTabs";
 import PaginationTokenList from "@/components/pagenation/PaginationTokenList";
+import { ActivityTable } from "@/components/table/ActivityTable";
 
 
 enum TabEnum {
@@ -19,6 +20,87 @@ enum TabEnum {
   Terminal = "Terminal",
   Activity = "Activity",
 }
+type TradeType = "buy" | "sell"
+interface IActivityTable{
+  id: number;
+  accountAddress: string;
+  type: TradeType;
+  ticker: string;
+  liquidity: string;
+  amount: string
+  date: string;
+  transactionHash: string;
+}
+const mockData: IActivityTable[] = [
+  {
+      id: 1,
+      accountAddress: "0xAbc1234567890abcdef1234567890abcdef1234",
+      type: "buy",
+      ticker: "ETH",
+      liquidity: "1000",
+      amount: "0.5",
+      date: "2024-05-29T12:34:56Z",
+      transactionHash: "0x123abc456def7890abcdef1234567890abcdef1234567890abcdef1234567890"
+  },
+  {
+      id: 2,
+      accountAddress: "0xDef4567890abcdef1234567890abcdef12345678",
+      type: "buy",
+      ticker: "BTC",
+      liquidity: "2000",
+      amount: "0.1",
+      date: "2024-05-28T11:22:33Z",
+      transactionHash: "0x456def7890abcdef1234567890abcdef1234567890abcdef1234567890abcdef"
+  },
+  {
+      id: 3,
+      accountAddress: "0xGhi7890abcdef1234567890abcdef123456789012",
+      type: "buy",
+      ticker: "USDT",
+      liquidity: "5000",
+      amount: "100",
+      date: "2024-05-27T10:20:30Z",
+      transactionHash: "0x7890abcdef1234567890abcdef1234567890abcdef1234567890abcdef123456"
+  },
+  {
+      id: 4,
+      accountAddress: "0xJkl01234567890abcdef1234567890abcdef1234",
+      type: "buy",
+      ticker: "UNI",
+      liquidity: "1500",
+      amount: "50",
+      date: "2024-05-26T09:18:27Z",
+      transactionHash: "0x01234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef"
+  },
+  {
+      id: 5,
+      accountAddress: "0xMno34567890abcdef1234567890abcdef12345678",
+      type: "buy",
+      ticker: "LINK",
+      liquidity: "800",
+      amount: "25",
+      date: "2024-05-25T08:16:24Z",
+      transactionHash: "0x34567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234"
+  },
+  {
+    id: 5,
+    accountAddress: "0xMno34567890abcdef1234567890abcdef12345678",
+    type: "buy",
+    ticker: "LINK",
+    liquidity: "800",
+    amount: "25",
+    date: "2024-05-25T08:16:24Z",
+    transactionHash: "0x34567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234"
+}
+];
+
+const mockData2 = () => {
+  for(let i = 0; i < 10; i++){
+    mockData.push(mockData[0])
+  }
+  return mockData
+}
+
 
 export default function Home() {
   const client = useSuiClient();
@@ -47,19 +129,16 @@ export default function Home() {
     fetchBalance();
   }, [client, accountAddress]);
 
-
   return (
-    <div className="max-w-[1608px] mx-auto h-screen bg-slate-950 w-full">
-      <div className="w-full mt-6">
+    <div className="max-w-[1608px] mx-auto min-h-screen  w-full mt-6">
+      <div className="w-full">
         <Top3CoinSection />
       </div>
       <div className="w-full">
         <div className="mt-4">
           <MainTabs setCurrentTab={setCurrentTab}/>
         </div>
-
         <Box className="flex justify-between">
-
           <div className="flex gap-4 pb-3">
             <DropDownSortBumpOther />
             <DropDownSortBumpDesc />
@@ -81,6 +160,7 @@ export default function Home() {
         </Box>
 
         {currentTab === TabEnum.Terminal && <TokenList />}
+        {currentTab === TabEnum.Activity && <ActivityTable data={mockData2()}/>}
 
 
 

@@ -25,7 +25,7 @@ const DetailCoinView = () => {
   const [currentTab, setCurrentTab] = useState(CoinTabEnum.Trades);
 
   return (
-    <div className="max-w-[1608px] w-full mx-auto h-screen flex-col items-center justify-center mt-[66px]">
+    <div className="max-w-[1608px] w-full mx-auto min-h-screen flex-col items-center justify-center mt-[66px]">
       <div className="w-full flex justify-start">
         <Button onClick={() => router.push('/')} className="w-[110px] h-10 px-4 py-2 rounded-[8px] bg-indigo-500 text-white text-base font-bold hover:bg-indigo-400">Back</Button>
       </div>

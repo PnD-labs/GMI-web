@@ -25,4 +25,7 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+  .bg-gradient-custom {
+    @apply bg-gradient-to-b from-[#ff3ce800] via-[#0B1421] to-[#0d273a];
+  }
 }

@@ -23,8 +23,8 @@ const TradingViewWidget: React.FC = () => {
 
       new (window as any).TradingView.widget({
         width: '100%',
-        height: 432,
-        symbol: 'CUSTOM:GPTCOIN',
+        height: 468,
+        symbol: 'NASDAQ:AAPL',
         interval: 'D',
         timezone: 'Etc/UTC',
         theme: theme,

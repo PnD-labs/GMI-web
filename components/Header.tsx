@@ -9,7 +9,7 @@ import { useEffect, useState } from "react"
 import { CoinBalance } from "@mysten/sui.js/client"
 import { usePathname, useRouter } from "next/navigation"
 import { useToast } from "./ui/use-toast"
-
+import axios from "axios";
 const Header = () => {
   const client = useSuiClient();
   const currentAccount = useCurrentAccount();
@@ -24,7 +24,6 @@ const Header = () => {
   const { toast } = useToast()
 
   useEffect(() => {
-
     const fetchBalance = async () => {
       if (client && accountAddress) {
         try {
@@ -50,19 +49,19 @@ const Header = () => {
 
   return (
     <div className="flex justify-center w-full">
-      <div className="max-w-[1608px] flex  py-4  w-full border-b-2 border-indigo-900">
+      <div className="max-w-[1608px] flex  py-4  w-full ">
         <Box>
-          <Heading className="cursor-pointer" onClick={()=>router.push("/")}>GMI</Heading>
+          <Heading className="cursor-pointer" onClick={() => router.push("/")}>GMI</Heading>
         </Box>
 
         {
           accountAddress ? <>
-            <div className="ml-[54px] mr-[68px] w-full max-w-[377px]  h-10 px-5 py-2.5 rounded-xl border border-indigo-500 justify-center items-center gap-1 inline-flex">
+            <div className="ml-[54px] mr-[68px] w-full max-w-[377px]  h-10 pl-5 py-2.5 rounded-xl border border-indigo-500 justify-center items-center gap-1 inline-flex">
               <div className="w-[18px] h-[18px] rounded  bg-green-500" />
-              <div className="text-white text-lg font-extrabold">created </div>
-              <div className="text-white text-lg font-extrabold">Wodu</div>
+              <div className="text-white  font-extrabold">created </div>
+              <div className="text-white  font-extrabold">Wodu</div>
               <div className="w-[18px] h-[18px] rounded  bg-green-500" />
-              <div className="text-white text-lg font-extrabold">on 05/10/24</div>
+              <div className="text-white  font-extrabold">on 05/10/24</div>
             </div>
             <div className="w-full max-w-[519px] flex gap-2.5">
               <div className="relative w-full">
@@ -73,7 +72,8 @@ const Header = () => {
                   placeholder="Search the token"
                 />
               </div>
-              <Button className="w-[110px] h-10 px-4 py-2 rounded-xl bg-indigo-500 text-white text-base font-bold hover:bg-indigo-400">
+              <Button
+                className="w-[110px] h-10 px-4 py-2 rounded-xl bg-indigo-500 text-white text-base font-bold hover:bg-indigo-400">
                 Search
               </Button>
             </div>
@@ -81,10 +81,10 @@ const Header = () => {
             <>
               <div className="ml-[54px] mr-[56px] w-full max-w-[377px]  h-10 px-5 py-2.5 rounded-xl border border-indigo-500 justify-center items-center gap-1 inline-flex">
                 <div className="w-[18px] h-[18px] rounded  bg-green-500" />
-                <div className="text-white text-lg font-extrabold">created </div>
-                <div className="text-white text-lg font-extrabold">Wodu</div>
+                <div className="text-white  font-extrabold">created </div>
+                <div className="text-white  font-extrabold">Wodu</div>
                 <div className="w-[18px] h-[18px] rounded  bg-green-500" />
-                <div className="text-white text-lg font-extrabold">on 05/10/24</div>
+                <div className="text-white font-extrabold">on 05/10/24</div>
               </div>
               <div className="w-full max-w-[519px] flex gap-2.5 ml-3">
                 <div className="relative w-full">
@@ -117,8 +117,8 @@ const Header = () => {
           }
           {
             currentAccount && (
-              <div className="h-10 px-4 py-2 rounded-xl shadow border-2 border-indigo-500 justify-center items-center gap-2 inline-flex">
-                <div className="text-slate-50 text-base font-bold ">{balance ? (BigInt(balance.totalBalance)/BigInt(10**9)).toString() : 0.0} SUI</div>
+              <div className="h-10 w-20 py-2 rounded-xl shadow border-2 border-indigo-500 justify-center items-center gap-2 inline-flex">
+                <div className="text-slate-50 text-base font-bold ">{balance ? ((BigInt(balance.totalBalance) / BigInt(10 ** 9)).toString()).length > 4 ? ((BigInt(balance.totalBalance) / BigInt(10 ** 9)).toString()).slice(0, 5) + "..." : ((BigInt(balance.totalBalance) / BigInt(10 ** 9)).toString()).slice(0, 5) : 0.0} SUI</div>
               </div>
             )
           }

@@ -1,14 +1,29 @@
 import { useRouter } from "next/navigation";
 
 
+//웹 소켓 연결
+//거래가 일어나면 쿼리를 날림
 
+export interface IPagination {
+ filter: string; // 검색
+ sort: string; // desc, asc , bump order
+ page: number;
+ limit: number;
+}
+
+export interface ITokenCardResponse {
+  result: ITokenCard[];
+  totalCount: number;
+}
 export interface ITokenCard {
+  id: string;
   name: string;
   creator: string;
   marketCap: string;
   replies: number;
-  ticker: string;
-  badge: boolean;
+  symbol: string;
+  creationTime: Date;
+  recentTradedTime: Date;
 }
 
 
