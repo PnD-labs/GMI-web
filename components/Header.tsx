@@ -53,7 +53,7 @@ const Header = () => {
     <div className="flex justify-center w-full">
       <div className="max-w-[1608px] flex  py-4  w-full ">
            <Image src={mainLogo} alt="logo" className="cursor-pointer
-           rounded-[8px] w-[50px] h-[50px]" onClick={() => router.push("/")}/>
+           rounded-[8px] w-[40px] h-[40px]" onClick={() => router.push("/")}/>
         {
           accountAddress ? <>
             <div className="ml-[54px] mr-[68px] w-full max-w-[377px]  h-10 pl-5 py-2.5 rounded-xl border border-indigo-500 justify-center items-center gap-1 inline-flex">
